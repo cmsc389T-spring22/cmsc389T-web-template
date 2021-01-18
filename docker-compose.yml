@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  nodejs:
+    #fill out the configuration here
+    networks:
+      - app-network
+  
+  #the nginx configuration is given below
+  #the website will run on localhost:80 
+  webserver:
+    image: nginx:mainline-alpine
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "80"
+    volumes:
+      - web-root:/var/www/html
+      - ./nginx-conf:/etc/nginx/conf.d
+    depends_on:
+      - nodejs
+    networks:
+      - app-network
+
+volumes:
+  web-root:
+    driver: local
+    driver_opts:
+      type: none
+      #fill out your absolute path to your folder here
+      device: /absolute/path/to/web/template/folder
+      o: bind
+
+networks:
+  app-network:
+    driver: bridge 
