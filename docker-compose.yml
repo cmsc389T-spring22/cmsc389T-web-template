@@ -3,11 +3,16 @@ version: '3'
 services:
   nodejs:
     #fill out the configuration here
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: node-web-app
+    container_name: node-web-app
     networks:
       - app-network
-  
+
   #the nginx configuration is given below
-  #the website will run on localhost:80 
+  #the website will run on localhost:80
   webserver:
     image: nginx:mainline-alpine
     container_name: webserver
@@ -28,9 +33,9 @@ volumes:
     driver_opts:
       type: none
       #fill out your absolute path to your folder here
-      device: /absolute/path/to/web/template/folder
+      device: /Users/rushil/Documents/School/personal-website
       o: bind
 
 networks:
   app-network:
-    driver: bridge 
+    driver: bridge
