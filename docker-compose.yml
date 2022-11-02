@@ -13,7 +13,7 @@ services:
     container_name: webserver
     restart: unless-stopped
     ports:
-      - "80"
+      - "80:80"
     volumes:
       - web-root:/var/www/html
       - ./nginx-conf:/etc/nginx/conf.d
